@@ -1,0 +1,9 @@
+[project]
+name = "mac-photos-duplicate-finder"
+version = "0.1.0"
+description = "Safe, read-only tools to inventory macOS Photos libraries and find exact duplicate media files."
+requires-python = ">=3.9"
+dependencies = []
+
+[tool.ruff]
+line-length = 100
