@@ -10,4 +10,5 @@
 - Decisio de seguretat: no es modifica `Photos.sqlite`, no esborra fitxers i no mou res dins del paquet `.photoslibrary`.
 - Actualitzacio: afegit `scripts/find_probable_duplicates.py` per detectar fotos probablement duplicades amb dHash perceptual. La deteccio es de nomes lectura, requereix Pillow i marca tots els resultats com a revisio manual obligatoria.
 - Actualitzacio: afegit output de progres al script de duplicats probables, incloent recompte inicial, percentatge de complecio, `--limit` i `--progress-every`.
+- Actualitzacio: si no es poden trobar o llegir `originals`/`Masters`, els scripts de duplicats ara s'aturen amb un missatge clar sobre Full Disk Access en comptes de retornar falsament zero resultats.
 

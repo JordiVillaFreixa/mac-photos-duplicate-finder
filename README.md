@@ -19,6 +19,13 @@ The project is intentionally conservative:
 
 Exact duplicate detection has no third-party Python dependencies. Probable duplicate detection requires Pillow because Python's standard library cannot safely decode common photo formats.
 
+If `explore_libraries.py` reports a library as `not-readable`, duplicate detection cannot work reliably. Grant Full Disk Access to the terminal app you are using:
+
+1. Open System Settings.
+2. Go to Privacy & Security > Full Disk Access.
+3. Enable Terminal, iTerm, VS Code, or the app from which you run the scripts.
+4. Restart that app and rerun `explore_libraries.py`.
+
 ## Scripts
 
 ### 1. Explore Photos libraries

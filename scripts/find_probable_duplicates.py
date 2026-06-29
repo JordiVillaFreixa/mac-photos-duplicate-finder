@@ -90,14 +90,17 @@ def main() -> int:
     if args.limit:
         print(f"Limit: {args.limit} photos", flush=True)
 
-    pairs, errors = find_probable_duplicate_pairs(
-        library,
-        max_distance=args.max_distance,
-        scan_all_media=args.scan_all_media,
-        limit=args.limit,
-        progress_callback=lambda message: print(message, flush=True),
-        progress_every=args.progress_every,
-    )
+    try:
+        pairs, errors = find_probable_duplicate_pairs(
+            library,
+            max_distance=args.max_distance,
+            scan_all_media=args.scan_all_media,
+            limit=args.limit,
+            progress_callback=lambda message: print(message, flush=True),
+            progress_every=args.progress_every,
+        )
+    except RuntimeError as exc:
+        raise SystemExit(str(exc)) from exc
     write_probable_duplicate_reports(
         pairs,
         errors,

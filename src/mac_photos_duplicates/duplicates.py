@@ -8,7 +8,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from .media_types import media_kind
-from .paths import original_media_roots
+from .paths import readable_media_roots
 
 
 @dataclass
@@ -30,7 +30,7 @@ class DuplicateGroup:
 
 
 def iter_media_files(library: Path, scan_all_media: bool = False) -> list[Path]:
-    roots = original_media_roots(library, scan_all_media=scan_all_media)
+    roots = readable_media_roots(library, scan_all_media=scan_all_media)
     media_files: list[Path] = []
     for root in roots:
         for path in root.rglob("*"):
@@ -172,4 +172,3 @@ def copy_duplicate_candidates(groups: list[DuplicateGroup], destination: Path, l
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(duplicate_path, target)
-

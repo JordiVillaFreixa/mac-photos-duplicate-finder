@@ -7,7 +7,7 @@ from collections.abc import Callable, Iterator
 from pathlib import Path
 
 from .media_types import PHOTO_EXTENSIONS
-from .paths import original_media_roots
+from .paths import readable_media_roots
 
 
 @dataclass
@@ -68,7 +68,7 @@ def dhash_image(path: Path, hash_size: int = 8) -> int:
 
 
 def iter_probable_images(library: Path, scan_all_media: bool = False) -> Iterator[Path]:
-    for root in original_media_roots(library, scan_all_media=scan_all_media):
+    for root in readable_media_roots(library, scan_all_media=scan_all_media):
         for path in root.rglob("*"):
             if path.is_file() and path.suffix.lower() in PHOTO_EXTENSIONS:
                 yield path

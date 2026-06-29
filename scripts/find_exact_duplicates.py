@@ -65,7 +65,10 @@ def main() -> int:
     validate_args(args)
 
     library = args.library.expanduser().resolve()
-    groups = find_exact_duplicate_groups(library, scan_all_media=args.scan_all_media)
+    try:
+        groups = find_exact_duplicate_groups(library, scan_all_media=args.scan_all_media)
+    except RuntimeError as exc:
+        raise SystemExit(str(exc)) from exc
     write_duplicate_reports(groups, args.output_dir, library, scan_all_media=args.scan_all_media)
 
     if args.copy_candidates_to:
@@ -83,4 +86,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

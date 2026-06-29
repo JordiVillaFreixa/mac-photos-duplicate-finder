@@ -10,6 +10,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from mac_photos_duplicates.duplicates import find_exact_duplicate_groups
 from mac_photos_duplicates.inventory import inventory_library
+from mac_photos_duplicates.paths import readable_media_roots
 from mac_photos_duplicates.probable import (
     ProbableImage,
     _find_pairs_with_bk_tree,
@@ -74,6 +75,16 @@ class DuplicateDetectionTests(unittest.TestCase):
     def test_format_progress_includes_percentage(self) -> None:
         self.assertEqual(format_progress(25, 100), "25/100 photos (25.0%)")
         self.assertEqual(format_progress(5, 0), "5 photos")
+
+    def test_readable_media_roots_fails_without_originals(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            library = Path(tmp) / "Test.photoslibrary"
+            library.mkdir()
+
+            with self.assertRaises(RuntimeError) as context:
+                readable_media_roots(library)
+
+        self.assertIn("No readable media roots", str(context.exception))
 
 
 if __name__ == "__main__":
