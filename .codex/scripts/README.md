@@ -19,4 +19,4 @@ Comandes manuals rellevants:
 - `python3 -m unittest discover -s tests`
 - `python3 -m py_compile ...`
 - `python3 scripts/find_probable_duplicates.py --help`
-
+- `python3 scripts/find_probable_duplicates.py --library /private/tmp/codex-empty.photoslibrary --output-dir /private/tmp/codex-probable-report --progress-every 1`

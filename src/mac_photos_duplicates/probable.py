@@ -3,10 +3,11 @@ from __future__ import annotations
 import csv
 import json
 from dataclasses import asdict, dataclass
+from collections.abc import Callable, Iterator
 from pathlib import Path
 
-from .duplicates import iter_media_files
 from .media_types import PHOTO_EXTENSIONS
+from .paths import original_media_roots
 
 
 @dataclass
@@ -66,24 +67,59 @@ def dhash_image(path: Path, hash_size: int = 8) -> int:
     return bits
 
 
-def iter_probable_images(library: Path, scan_all_media: bool = False) -> list[Path]:
-    return [
-        path
-        for path in iter_media_files(library, scan_all_media=scan_all_media)
-        if path.suffix.lower() in PHOTO_EXTENSIONS
-    ]
+def iter_probable_images(library: Path, scan_all_media: bool = False) -> Iterator[Path]:
+    for root in original_media_roots(library, scan_all_media=scan_all_media):
+        for path in root.rglob("*"):
+            if path.is_file() and path.suffix.lower() in PHOTO_EXTENSIONS:
+                yield path
+
+
+def count_probable_images(
+    library: Path,
+    scan_all_media: bool = False,
+    limit: int | None = None,
+) -> int:
+    count = 0
+    for _ in iter_probable_images(library, scan_all_media=scan_all_media):
+        if limit is not None and count >= limit:
+            break
+        count += 1
+    return count
+
+
+def format_progress(scanned: int, total: int | None) -> str:
+    if total is None or total == 0:
+        return f"{scanned} photos"
+    percentage = min(scanned / total * 100, 100.0)
+    return f"{scanned}/{total} photos ({percentage:.1f}%)"
 
 
 def find_probable_duplicate_pairs(
     library_path: Path,
     max_distance: int = 6,
     scan_all_media: bool = False,
+    limit: int | None = None,
+    progress_callback: Callable[[str], None] | None = None,
+    progress_every: int = 100,
 ) -> tuple[list[ProbableDuplicatePair], list[str]]:
     library = library_path.expanduser().resolve()
     images: list[ProbableImage] = []
     errors: list[str] = []
 
+    if progress_callback:
+        progress_callback("Counting candidate photos...")
+    total = count_probable_images(library, scan_all_media=scan_all_media, limit=limit)
+    if progress_callback:
+        progress_callback(f"Found {total} candidate photos to scan.")
+        progress_callback("Computing perceptual hashes...")
+
+    scanned = 0
     for path in iter_probable_images(library, scan_all_media=scan_all_media):
+        if limit is not None and scanned >= limit:
+            if progress_callback:
+                progress_callback(f"Reached --limit {limit}; stopping early.")
+            break
+        scanned += 1
         try:
             digest = dhash_image(path)
             size = path.stat().st_size
@@ -97,7 +133,20 @@ def find_probable_duplicate_pairs(
             )
         except Exception as exc:  # Pillow can raise format-specific decoding errors.
             errors.append(f"Skipped {path}: {exc}")
+        if progress_callback and progress_every > 0 and scanned % progress_every == 0:
+            progress_callback(
+                f"Scanned {format_progress(scanned, total)}; hashed {len(images)}; "
+                f"skipped {len(errors)}."
+            )
 
+    if progress_callback:
+        progress_callback(
+            f"Finished scanning {format_progress(scanned, total)}; hashed {len(images)}; "
+            f"skipped {len(errors)}."
+        )
+        progress_callback(
+            f"Comparing {len(images)} perceptual hashes with max distance {max_distance}..."
+        )
     pairs = _find_pairs_with_bk_tree(images, max_distance)
 
     pairs.sort(key=lambda pair: (pair.hamming_distance, pair.first_path, pair.second_path))

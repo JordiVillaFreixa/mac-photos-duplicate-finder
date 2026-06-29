@@ -40,6 +40,17 @@ def parse_args() -> argparse.Namespace:
             "Default scans only originals/Masters."
         ),
     )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        help="Scan only the first N matching photos. Useful for testing that the script is active.",
+    )
+    parser.add_argument(
+        "--progress-every",
+        type=int,
+        default=100,
+        help="Print progress every N scanned photos. Use 0 to disable progress updates.",
+    )
     return parser.parse_args()
 
 
@@ -55,6 +66,10 @@ def validate_args(args: argparse.Namespace) -> Path:
         raise SystemExit(
             "Refusing --max-distance above 12 because it is likely to generate too many false positives."
         )
+    if args.limit is not None and args.limit < 1:
+        raise SystemExit("--limit must be 1 or greater.")
+    if args.progress_every < 0:
+        raise SystemExit("--progress-every must be 0 or greater.")
     return library
 
 
@@ -66,10 +81,22 @@ def main() -> int:
     except RuntimeError as exc:
         raise SystemExit(str(exc)) from exc
 
+    print(f"Library: {library}", flush=True)
+    print(
+        f"Mode: {'all media in package' if args.scan_all_media else 'originals/Masters only'}",
+        flush=True,
+    )
+    print(f"Max dHash distance: {args.max_distance}", flush=True)
+    if args.limit:
+        print(f"Limit: {args.limit} photos", flush=True)
+
     pairs, errors = find_probable_duplicate_pairs(
         library,
         max_distance=args.max_distance,
         scan_all_media=args.scan_all_media,
+        limit=args.limit,
+        progress_callback=lambda message: print(message, flush=True),
+        progress_every=args.progress_every,
     )
     write_probable_duplicate_reports(
         pairs,
@@ -89,4 +116,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

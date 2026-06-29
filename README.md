@@ -68,6 +68,18 @@ python3 scripts/find_probable_duplicates.py \
   --output-dir reports/probable-duplicates
 ```
 
+For a short smoke test with visible progress:
+
+```bash
+python3 scripts/find_probable_duplicates.py \
+  --library ~/Pictures/"Photos Library.photoslibrary" \
+  --output-dir reports/probable-duplicates-test \
+  --limit 200 \
+  --progress-every 25
+```
+
+Progress output includes the number of scanned photos and the completion percentage, for example `Scanned 75/200 photos (37.5%)`.
+
 This creates:
 
 - `probable_duplicate_pairs.json`: machine-readable candidate pairs.

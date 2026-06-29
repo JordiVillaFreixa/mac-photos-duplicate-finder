@@ -10,7 +10,12 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from mac_photos_duplicates.duplicates import find_exact_duplicate_groups
 from mac_photos_duplicates.inventory import inventory_library
-from mac_photos_duplicates.probable import ProbableImage, _find_pairs_with_bk_tree, hamming_distance
+from mac_photos_duplicates.probable import (
+    ProbableImage,
+    _find_pairs_with_bk_tree,
+    format_progress,
+    hamming_distance,
+)
 
 
 class DuplicateDetectionTests(unittest.TestCase):
@@ -65,6 +70,10 @@ class DuplicateDetectionTests(unittest.TestCase):
         self.assertEqual(len(pairs), 1)
         self.assertEqual(pairs[0].first_path, "a.jpg")
         self.assertEqual(pairs[0].second_path, "b.jpg")
+
+    def test_format_progress_includes_percentage(self) -> None:
+        self.assertEqual(format_progress(25, 100), "25/100 photos (25.0%)")
+        self.assertEqual(format_progress(5, 0), "5 photos")
 
 
 if __name__ == "__main__":
