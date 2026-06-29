@@ -7,4 +7,5 @@ reports/
 dist/
 build/
 *.egg-info/
+.codex/
 
