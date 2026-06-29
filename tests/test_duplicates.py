@@ -10,6 +10,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from mac_photos_duplicates.duplicates import find_exact_duplicate_groups
 from mac_photos_duplicates.inventory import inventory_library
+from mac_photos_duplicates.probable import ProbableImage, _find_pairs_with_bk_tree, hamming_distance
 
 
 class DuplicateDetectionTests(unittest.TestCase):
@@ -47,6 +48,23 @@ class DuplicateDetectionTests(unittest.TestCase):
         self.assertEqual(result.original_media_files, 2)
         self.assertEqual(result.original_photos, 1)
         self.assertEqual(result.original_videos, 1)
+
+    def test_hamming_distance_counts_different_bits(self) -> None:
+        self.assertEqual(hamming_distance(0b1010, 0b1001), 2)
+        self.assertEqual(hamming_distance(0b1111, 0b1111), 0)
+
+    def test_bk_tree_finds_probable_pairs(self) -> None:
+        images = [
+            ProbableImage("a.jpg", "a.jpg", 100, "0000000000000000"),
+            ProbableImage("b.jpg", "b.jpg", 101, "0000000000000001"),
+            ProbableImage("c.jpg", "c.jpg", 102, "ffffffffffffffff"),
+        ]
+
+        pairs = _find_pairs_with_bk_tree(images, max_distance=1)
+
+        self.assertEqual(len(pairs), 1)
+        self.assertEqual(pairs[0].first_path, "a.jpg")
+        self.assertEqual(pairs[0].second_path, "b.jpg")
 
 
 if __name__ == "__main__":

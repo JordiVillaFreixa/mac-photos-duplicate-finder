@@ -8,4 +8,5 @@
   - `scripts/find_exact_duplicates.py`: deteccio de duplicats exactes per SHA-256 i generacio de proposta revisable.
   - Proves basiques amb `unittest`.
 - Decisio de seguretat: no es modifica `Photos.sqlite`, no esborra fitxers i no mou res dins del paquet `.photoslibrary`.
+- Actualitzacio: afegit `scripts/find_probable_duplicates.py` per detectar fotos probablement duplicades amb dHash perceptual. La deteccio es de nomes lectura, requereix Pillow i marca tots els resultats com a revisio manual obligatoria.
 

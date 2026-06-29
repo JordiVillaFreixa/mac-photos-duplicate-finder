@@ -16,4 +16,7 @@ Comandes manuals rellevants:
 - `chmod +x scripts/explore_libraries.py scripts/find_exact_duplicates.py`
 - `find . -type d -name __pycache__ -prune -exec rm -rf {} +`
 - `git init`
+- `python3 -m unittest discover -s tests`
+- `python3 -m py_compile ...`
+- `python3 scripts/find_probable_duplicates.py --help`
 
