@@ -9,6 +9,8 @@ All notable project distribution changes are documented here.
 - GitHub Pages website under `docs/` with SEO metadata, Open Graph/Twitter cards, sitemap, robots file, and download links.
 - Downloadable ZIP and tar.gz source distributions with SHA-256 checksums and a JSON manifest.
 - Versioning workflow based on `VERSION`, `CHANGELOG.md`, and generated release metadata.
+- GitHub Releases workflow that builds distributions and uploads release assets.
+- Custom domain documentation for `mac-photos-duplicat-finder.org` and its `www` alternate.
 - Quality-ranked duplicate workflow that keeps the best detected Photos asset by pixel count and metadata.
 - Photos review album automation with batch processing and timeout controls.
 - Copyright notice for Jordi Villà.
