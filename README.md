@@ -56,40 +56,40 @@ GitHub Pages deployment is configured in `.github/workflows/pages.yml`. In the r
 
 ## GitHub Pages custom domain
 
-The site is configured for the custom domain `mac-photos-duplicat-finder.org`. The repository contains `docs/CNAME`, but because this project deploys Pages through GitHub Actions, the custom domain still must be configured in GitHub repository Settings > Pages and the DNS records must exist at the domain provider.
+The site is configured for the custom domain `mac-photos-duplicate-finder.org`. The repository contains `docs/CNAME`, but because this project deploys Pages through GitHub Actions, the custom domain still must be configured in GitHub repository Settings > Pages and the DNS records must exist at the domain provider.
 
 If GitHub shows `InvalidDNSError`, DNS is not resolving. Add these records at the DNS provider:
 
 ```text
-mac-photos-duplicat-finder.org.  A     185.199.108.153
-mac-photos-duplicat-finder.org.  A     185.199.109.153
-mac-photos-duplicat-finder.org.  A     185.199.110.153
-mac-photos-duplicat-finder.org.  A     185.199.111.153
+mac-photos-duplicate-finder.org.  A     185.199.108.153
+mac-photos-duplicate-finder.org.  A     185.199.109.153
+mac-photos-duplicate-finder.org.  A     185.199.110.153
+mac-photos-duplicate-finder.org.  A     185.199.111.153
 ```
 
 Optional IPv6 records:
 
 ```text
-mac-photos-duplicat-finder.org.  AAAA  2606:50c0:8000::153
-mac-photos-duplicat-finder.org.  AAAA  2606:50c0:8001::153
-mac-photos-duplicat-finder.org.  AAAA  2606:50c0:8002::153
-mac-photos-duplicat-finder.org.  AAAA  2606:50c0:8003::153
+mac-photos-duplicate-finder.org.  AAAA  2606:50c0:8000::153
+mac-photos-duplicate-finder.org.  AAAA  2606:50c0:8001::153
+mac-photos-duplicate-finder.org.  AAAA  2606:50c0:8002::153
+mac-photos-duplicate-finder.org.  AAAA  2606:50c0:8003::153
 ```
 
 For the alternate `www` name:
 
 ```text
-www.mac-photos-duplicat-finder.org.  CNAME  jordivillafreixa.github.io.
+www.mac-photos-duplicate-finder.org.  CNAME  jordivillafreixa.github.io.
 ```
 
 Do not include the repository name in the `www` CNAME target. After DNS propagates, run:
 
 ```bash
-dig +short mac-photos-duplicat-finder.org A
-dig +short www.mac-photos-duplicat-finder.org CNAME
+dig +short mac-photos-duplicate-finder.org A
+dig +short www.mac-photos-duplicate-finder.org CNAME
 ```
 
-If the intended domain is `mac-photos-duplicate-finder.org` with the extra `e`, update `docs/CNAME`, `docs/index.html`, `docs/robots.txt`, `docs/sitemap.xml`, and the DNS records consistently.
+GitHub can only provision HTTPS after these DNS records resolve and the Pages custom domain check passes. Until then, `Enforce HTTPS` remains unavailable.
 
 ## GitHub Releases
 
