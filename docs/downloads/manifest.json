@@ -1,0 +1,22 @@
+{
+  "name": "mac-photos-duplicate-finder",
+  "version": "0.2.0",
+  "generated_at": "2026-06-30T06:38:37.869155+00:00",
+  "release_notes": "### Added\n\n- GitHub Pages website under `docs/` with SEO metadata, Open Graph/Twitter cards, sitemap, robots file, and download links.\n- Downloadable ZIP and tar.gz source distributions with SHA-256 checksums and a JSON manifest.\n- Versioning workflow based on `VERSION`, `CHANGELOG.md`, and generated release metadata.\n- Quality-ranked duplicate workflow that keeps the best detected Photos asset by pixel count and metadata.\n- Photos review album automation with batch processing and timeout controls.\n- Copyright notice for Jordi Villà.\n\n### Changed\n\n- README now includes a fuller narrative workflow, parameter explanations, safety warnings, and as-is disclaimer.\n- Distribution downloads are linked from the GitHub Pages site instead of being ad hoc local artifacts.",
+  "distributions": [
+    {
+      "filename": "mac-photos-duplicate-finder-0.2.0.zip",
+      "format": "zip",
+      "size_bytes": 34543,
+      "sha256": "e035436d66a3c161ebe3ee05f3fb8fe84e777159b7d793206c9106645fa34c5b",
+      "url": "downloads/mac-photos-duplicate-finder-0.2.0.zip"
+    },
+    {
+      "filename": "mac-photos-duplicate-finder-0.2.0.tar.gz",
+      "format": "tar.gz",
+      "size_bytes": 24121,
+      "sha256": "51dd78118fa23ddf1b6a464009cd0b6b6e920e7f432997940b2fa0ef99917202",
+      "url": "downloads/mac-photos-duplicate-finder-0.2.0.tar.gz"
+    }
+  ]
+}

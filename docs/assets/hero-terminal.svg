@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Mac Photos Duplicate Finder report preview</title>
+  <desc id="desc">A terminal and report preview showing duplicate detection and a Photos review album workflow.</desc>
+  <defs>
+    <linearGradient id="screen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#18202b"/>
+      <stop offset="1" stop-color="#26313c"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="#f4f7fb"/>
+  <rect x="80" y="70" width="1040" height="620" rx="22" fill="#ffffff" stroke="#c9d4e2"/>
+  <rect x="120" y="120" width="600" height="440" rx="14" fill="url(#screen)"/>
+  <circle cx="154" cy="153" r="9" fill="#ef4444"/>
+  <circle cx="182" cy="153" r="9" fill="#f59e0b"/>
+  <circle cx="210" cy="153" r="9" fill="#22c55e"/>
+  <text x="150" y="210" fill="#d6f7ef" font-family="Menlo, Consolas, monospace" font-size="25">python3 scripts/find_exact_duplicates.py \</text>
+  <text x="150" y="252" fill="#a7f3d0" font-family="Menlo, Consolas, monospace" font-size="25">  --library Photos Library.photoslibrary</text>
+  <text x="150" y="320" fill="#e5edf6" font-family="Menlo, Consolas, monospace" font-size="27">Found 13,960 duplicate groups</text>
+  <text x="150" y="366" fill="#e5edf6" font-family="Menlo, Consolas, monospace" font-size="27">Ranked by pixels + metadata</text>
+  <text x="150" y="432" fill="#93c5fd" font-family="Menlo, Consolas, monospace" font-size="25">Adding batch 42/180...</text>
+  <text x="150" y="478" fill="#93c5fd" font-family="Menlo, Consolas, monospace" font-size="25">Photos album ready for review</text>
+  <rect x="760" y="130" width="290" height="370" rx="18" fill="#eef6ff" stroke="#b8c8da"/>
+  <rect x="790" y="170" width="230" height="36" rx="8" fill="url(#accent)"/>
+  <text x="815" y="195" fill="#ffffff" font-family="Arial, sans-serif" font-size="17" font-weight="700">Review album</text>
+  <rect x="790" y="235" width="230" height="42" rx="8" fill="#ffffff" stroke="#cfdae8"/>
+  <rect x="790" y="300" width="230" height="42" rx="8" fill="#ffffff" stroke="#cfdae8"/>
+  <rect x="790" y="365" width="230" height="42" rx="8" fill="#ffffff" stroke="#cfdae8"/>
+  <text x="815" y="262" fill="#1e293b" font-family="Arial, sans-serif" font-size="17">Exact duplicates</text>
+  <text x="815" y="327" fill="#1e293b" font-family="Arial, sans-serif" font-size="17">Lower quality copies</text>
+  <text x="815" y="392" fill="#1e293b" font-family="Arial, sans-serif" font-size="17">Manual delete only</text>
+  <path d="M720 340 C760 340 750 270 790 270" fill="none" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
+  <path d="M770 252 L794 270 L766 285" fill="none" stroke="#2563eb" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

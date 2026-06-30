@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jordivilla.github.io/mac-photos-duplicate-finder/sitemap.xml

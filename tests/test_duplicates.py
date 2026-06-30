@@ -10,6 +10,8 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from mac_photos_duplicates.duplicates import find_exact_duplicate_groups
 from mac_photos_duplicates.inventory import inventory_library
+from mac_photos_duplicates.photos_album import build_album_plan, build_applescript
+from mac_photos_duplicates.quality import rerank_duplicate_groups_by_quality
 from mac_photos_duplicates.paths import readable_media_roots
 from mac_photos_duplicates.probable import (
     ProbableImage,
@@ -85,6 +87,189 @@ class DuplicateDetectionTests(unittest.TestCase):
                 readable_media_roots(library)
 
         self.assertIn("No readable media roots", str(context.exception))
+
+    def test_build_album_plan_maps_exact_duplicate_csv_to_asset_uuid(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            library = root / "Test.photoslibrary"
+            originals = library / "originals" / "A"
+            database = library / "database"
+            originals.mkdir(parents=True)
+            database.mkdir()
+            candidate = originals / "ASSET-1.jpeg"
+            candidate.write_bytes(b"image")
+
+            db_path = database / "Photos.sqlite"
+            import sqlite3
+
+            connection = sqlite3.connect(db_path)
+            try:
+                connection.execute(
+                    "create table ZASSET ("
+                    "ZUUID text, ZCLOUDASSETGUID text, ZDIRECTORY text, "
+                    "ZFILENAME text, ZTRASHEDSTATE integer)"
+                )
+                connection.execute(
+                    "insert into ZASSET values (?, ?, ?, ?, ?)",
+                    ("uuid-1", "cloud-1", "A", "ASSET-1.jpeg", 0),
+                )
+                connection.commit()
+            finally:
+                connection.close()
+
+            proposal = root / "duplicate_proposal.csv"
+            proposal.write_text(
+                "keep_path,duplicate_candidate_path\n"
+                f"{originals / 'KEEP.jpeg'},{candidate}\n",
+                encoding="utf-8",
+            )
+
+            plan = build_album_plan(library, proposal, "Duplicats candidats")
+
+        self.assertEqual(len(plan.mapped_assets), 1)
+        self.assertEqual(plan.mapped_assets[0].uuid, "uuid-1")
+        self.assertEqual(plan.unmapped_paths, [])
+
+    def test_build_album_plan_maps_live_photo_video_resource_by_uuid(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            library = root / "Test.photoslibrary"
+            originals = library / "originals" / "A"
+            database = library / "database"
+            originals.mkdir(parents=True)
+            database.mkdir()
+            candidate = originals / "uuid-1_3.mov"
+            candidate.write_bytes(b"video")
+
+            db_path = database / "Photos.sqlite"
+            import sqlite3
+
+            connection = sqlite3.connect(db_path)
+            try:
+                connection.execute(
+                    "create table ZASSET ("
+                    "ZUUID text, ZCLOUDASSETGUID text, ZDIRECTORY text, "
+                    "ZFILENAME text, ZTRASHEDSTATE integer)"
+                )
+                connection.execute(
+                    "insert into ZASSET values (?, ?, ?, ?, ?)",
+                    ("uuid-1", "cloud-1", "A", "uuid-1.jpeg", 0),
+                )
+                connection.commit()
+            finally:
+                connection.close()
+
+            proposal = root / "duplicate_proposal.csv"
+            proposal.write_text(
+                "keep_path,duplicate_candidate_path\n"
+                f"{originals / 'KEEP.jpeg'},{candidate}\n",
+                encoding="utf-8",
+            )
+
+            plan = build_album_plan(library, proposal, "Duplicats candidats")
+
+        self.assertEqual(len(plan.mapped_assets), 1)
+        self.assertEqual(plan.mapped_assets[0].uuid, "uuid-1")
+        self.assertEqual(plan.unmapped_paths, [])
+
+    def test_build_applescript_reads_ids_from_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            library = root / "Test.photoslibrary"
+            originals = library / "originals" / "A"
+            database = library / "database"
+            originals.mkdir(parents=True)
+            database.mkdir()
+            candidate = originals / "ASSET-1.jpeg"
+            candidate.write_bytes(b"image")
+
+            db_path = database / "Photos.sqlite"
+            import sqlite3
+
+            connection = sqlite3.connect(db_path)
+            try:
+                connection.execute(
+                    "create table ZASSET ("
+                    "ZUUID text, ZCLOUDASSETGUID text, ZDIRECTORY text, "
+                    "ZFILENAME text, ZTRASHEDSTATE integer)"
+                )
+                connection.execute(
+                    "insert into ZASSET values (?, ?, ?, ?, ?)",
+                    ("uuid-1", "cloud-1", "A", "ASSET-1.jpeg", 0),
+                )
+                connection.commit()
+            finally:
+                connection.close()
+
+            proposal = root / "duplicate_proposal.csv"
+            proposal.write_text(
+                "keep_path,duplicate_candidate_path\n"
+                f"{originals / 'KEEP.jpeg'},{candidate}\n",
+                encoding="utf-8",
+            )
+
+            plan = build_album_plan(library, proposal, "Duplicats candidats")
+            script = build_applescript(plan, ids_path=root / "ids.txt", batch_size=25)
+
+        self.assertIn("set idsText to read POSIX file idsPath", script)
+        self.assertIn("set assetIds to paragraphs of idsText", script)
+        self.assertIn("set batchSize to 25", script)
+        self.assertIn("add batchItems to targetAlbum", script)
+        self.assertNotIn("set assetIds to {", script)
+
+    def test_quality_ranking_keeps_highest_pixel_count(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            library = root / "Test.photoslibrary"
+            originals = library / "originals" / "A"
+            database = library / "database"
+            originals.mkdir(parents=True)
+            database.mkdir()
+            low = originals / "LOW.jpeg"
+            high = originals / "HIGH.jpeg"
+            low.write_bytes(b"same")
+            high.write_bytes(b"same")
+
+            db_path = database / "Photos.sqlite"
+            import sqlite3
+
+            connection = sqlite3.connect(db_path)
+            try:
+                connection.execute(
+                    "create table ZASSET ("
+                    "ZUUID text, ZDIRECTORY text, ZFILENAME text, "
+                    "ZWIDTH integer, ZHEIGHT integer, ZDATECREATED real, "
+                    "ZLATITUDE real, ZLONGITUDE real, ZTRASHEDSTATE integer)"
+                )
+                connection.execute(
+                    "insert into ZASSET values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    ("low-uuid", "A", "LOW.jpeg", 100, 100, 1.0, -180.0, -180.0, 0),
+                )
+                connection.execute(
+                    "insert into ZASSET values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    ("high-uuid", "A", "HIGH.jpeg", 200, 200, 1.0, -180.0, -180.0, 0),
+                )
+                connection.commit()
+            finally:
+                connection.close()
+
+            groups_json = root / "duplicate_groups.json"
+            groups_json.write_text(
+                "[{"
+                '"sha256":"abc",'
+                '"size_bytes":4,'
+                '"kind":"photo",'
+                f'"keep":"{low}",'
+                f'"duplicate_candidates":["{high}"]'
+                "}]",
+                encoding="utf-8",
+            )
+
+            groups = rerank_duplicate_groups_by_quality(library, groups_json)
+
+        self.assertEqual(groups[0].keep, str(high))
+        self.assertEqual(groups[0].previous_keep, str(low))
+        self.assertEqual(groups[0].duplicate_candidates[0].path, str(low))
 
 
 if __name__ == "__main__":

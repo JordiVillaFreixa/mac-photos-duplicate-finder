@@ -1,0 +1,49 @@
+{
+  "name": "mac-photos-duplicate-finder",
+  "releases": [
+    {
+      "name": "mac-photos-duplicate-finder",
+      "version": "0.2.0",
+      "generated_at": "2026-06-30T06:38:37.869155+00:00",
+      "release_notes": "### Added\n\n- GitHub Pages website under `docs/` with SEO metadata, Open Graph/Twitter cards, sitemap, robots file, and download links.\n- Downloadable ZIP and tar.gz source distributions with SHA-256 checksums and a JSON manifest.\n- Versioning workflow based on `VERSION`, `CHANGELOG.md`, and generated release metadata.\n- Quality-ranked duplicate workflow that keeps the best detected Photos asset by pixel count and metadata.\n- Photos review album automation with batch processing and timeout controls.\n- Copyright notice for Jordi Villà.\n\n### Changed\n\n- README now includes a fuller narrative workflow, parameter explanations, safety warnings, and as-is disclaimer.\n- Distribution downloads are linked from the GitHub Pages site instead of being ad hoc local artifacts.",
+      "distributions": [
+        {
+          "filename": "mac-photos-duplicate-finder-0.2.0.zip",
+          "format": "zip",
+          "size_bytes": 34543,
+          "sha256": "e035436d66a3c161ebe3ee05f3fb8fe84e777159b7d793206c9106645fa34c5b",
+          "url": "downloads/mac-photos-duplicate-finder-0.2.0.zip"
+        },
+        {
+          "filename": "mac-photos-duplicate-finder-0.2.0.tar.gz",
+          "format": "tar.gz",
+          "size_bytes": 24121,
+          "sha256": "51dd78118fa23ddf1b6a464009cd0b6b6e920e7f432997940b2fa0ef99917202",
+          "url": "downloads/mac-photos-duplicate-finder-0.2.0.tar.gz"
+        }
+      ]
+    },
+    {
+      "name": "mac-photos-duplicate-finder",
+      "version": "0.1.0",
+      "generated_at": "",
+      "release_notes": "### Added\n\n- Initial safe Python scripts for inspecting Photos libraries.\n- Exact duplicate detection by SHA-256.\n- Probable duplicate photo detection by perceptual dHash.\n- Read-only reports and safety summaries.",
+      "distributions": [
+        {
+          "filename": "mac-photos-duplicate-finder-0.1.0.zip",
+          "format": "zip",
+          "size_bytes": 31487,
+          "sha256": "66120bf77d7f83764f827b000fdce284ad5fd0508abd4b5ceef324a65853e57e",
+          "url": "downloads/mac-photos-duplicate-finder-0.1.0.zip"
+        },
+        {
+          "filename": "mac-photos-duplicate-finder-0.1.0.tar.gz",
+          "format": "tar.gz",
+          "size_bytes": 21640,
+          "sha256": "077b9527dcf213a648503121c1e4b19550980d7409ac77dcb856a7d4ee876eab",
+          "url": "downloads/mac-photos-duplicate-finder-0.1.0.tar.gz"
+        }
+      ]
+    }
+  ]
+}
