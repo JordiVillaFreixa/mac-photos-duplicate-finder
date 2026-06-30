@@ -3,6 +3,28 @@
   "releases": [
     {
       "name": "mac-photos-duplicate-finder",
+      "version": "0.3.0",
+      "generated_at": "2026-06-30T07:16:13.092021+00:00",
+      "release_notes": "### Changed\n\n- Renamed the quality-ranked Photos album from `Duplicats més baixa qualitat` to `Lower-Quality Duplicate Candidates`.\n- Updated README, website examples, generated low-quality duplicate CSV reports, and Photos album plans to use the new English album name.",
+      "distributions": [
+        {
+          "filename": "mac-photos-duplicate-finder-0.3.0.zip",
+          "format": "zip",
+          "size_bytes": 36068,
+          "sha256": "6210a1729dadde608b375c886ba15229ceaaf0eee706c262308d9afc65df2932",
+          "url": "downloads/mac-photos-duplicate-finder-0.3.0.zip"
+        },
+        {
+          "filename": "mac-photos-duplicate-finder-0.3.0.tar.gz",
+          "format": "tar.gz",
+          "size_bytes": 25537,
+          "sha256": "46a53c548ef54c758c9dfd1648e8024ad061fed9c10a6284b039675554cc448b",
+          "url": "downloads/mac-photos-duplicate-finder-0.3.0.tar.gz"
+        }
+      ]
+    },
+    {
+      "name": "mac-photos-duplicate-finder",
       "version": "0.2.0",
       "generated_at": "2026-06-30T06:48:57.273294+00:00",
       "release_notes": "### Added\n\n- GitHub Pages website under `docs/` with SEO metadata, Open Graph/Twitter cards, sitemap, robots file, and download links.\n- Downloadable ZIP and tar.gz source distributions with SHA-256 checksums and a JSON manifest.\n- Versioning workflow based on `VERSION`, `CHANGELOG.md`, and generated release metadata.\n- GitHub Releases workflow that builds distributions and uploads release assets.\n- Custom domain documentation for `mac-photos-duplicate-finder.org` and its `www` alternate.\n- Quality-ranked duplicate workflow that keeps the best detected Photos asset by pixel count and metadata.\n- Photos review album automation with batch processing and timeout controls.\n- Copyright notice for Jordi Villà.\n\n### Changed\n\n- README now includes a fuller narrative workflow, parameter explanations, safety warnings, and as-is disclaimer.\n- Distribution downloads are linked from the GitHub Pages site instead of being ad hoc local artifacts.",

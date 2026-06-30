@@ -137,7 +137,7 @@ def write_quality_duplicate_reports(
                         "duplicate_metadata_score": candidate.quality.metadata_score,
                         "duplicate_has_capture_date": candidate.quality.has_capture_date,
                         "duplicate_has_location": candidate.quality.has_location,
-                        "target_review_album": "Duplicats més baixa qualitat",
+                        "target_review_album": "Lower-Quality Duplicate Candidates",
                     }
                 )
 

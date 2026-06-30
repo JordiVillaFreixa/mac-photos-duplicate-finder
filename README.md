@@ -40,13 +40,13 @@ The public project website lives in `docs/` and is ready for GitHub Pages. It in
 To create a new downloadable release, update `VERSION` and `CHANGELOG.md`, then regenerate the archives:
 
 ```bash
-python3 scripts/build_distributions.py --version 0.2.0
+python3 scripts/build_distributions.py --version 0.3.0
 ```
 
 This writes:
 
-- `docs/downloads/mac-photos-duplicate-finder-0.2.0.zip`
-- `docs/downloads/mac-photos-duplicate-finder-0.2.0.tar.gz`
+- `docs/downloads/mac-photos-duplicate-finder-0.3.0.zip`
+- `docs/downloads/mac-photos-duplicate-finder-0.3.0.tar.gz`
 - `docs/downloads/SHA256SUMS.txt`
 - `docs/downloads/manifest.json`
 
@@ -205,7 +205,7 @@ Then create the Photos album from that quality-ranked proposal:
 python3 scripts/create_photos_review_album.py \
   --library ~/Pictures/"Photos Library.photoslibrary" \
   --proposal-csv reports/duplicates-low-quality/duplicate_proposal.csv \
-  --album-name "Duplicats més baixa qualitat" \
+  --album-name "Lower-Quality Duplicate Candidates" \
   --output-dir reports/photos-album-low-quality \
   --execute \
   --batch-size 100 \
@@ -395,7 +395,7 @@ For the quality-ranked album:
 python3 scripts/create_photos_review_album.py \
   --library ~/Pictures/"Photos Library.photoslibrary" \
   --proposal-csv reports/duplicates-low-quality/duplicate_proposal.csv \
-  --album-name "Duplicats més baixa qualitat" \
+  --album-name "Lower-Quality Duplicate Candidates" \
   --output-dir reports/photos-album-low-quality \
   --execute
 ```

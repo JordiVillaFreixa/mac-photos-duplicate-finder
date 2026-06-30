@@ -1,6 +1,6 @@
 [project]
 name = "mac-photos-duplicate-finder"
-version = "0.2.0"
+version = "0.3.0"
 description = "Safe tools to inventory macOS Photos libraries, find duplicates, rank copies, and create review albums."
 requires-python = ">=3.8"
 dependencies = []

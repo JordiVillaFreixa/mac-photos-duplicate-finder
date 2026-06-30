@@ -2,6 +2,13 @@
 
 All notable project distribution changes are documented here.
 
+## 0.3.0 - 2026-06-30
+
+### Changed
+
+- Renamed the quality-ranked Photos album from `Duplicats més baixa qualitat` to `Lower-Quality Duplicate Candidates`.
+- Updated README, website examples, generated low-quality duplicate CSV reports, and Photos album plans to use the new English album name.
+
 ## 0.2.0 - 2026-06-30
 
 ### Added
