@@ -40,13 +40,13 @@ The public project website lives in `docs/` and is ready for GitHub Pages. It in
 To create a new downloadable release, update `VERSION` and `CHANGELOG.md`, then regenerate the archives:
 
 ```bash
-python3 scripts/build_distributions.py --version 0.3.0
+python3 scripts/build_distributions.py --version 0.3.1
 ```
 
 This writes:
 
-- `docs/downloads/mac-photos-duplicate-finder-0.3.0.zip`
-- `docs/downloads/mac-photos-duplicate-finder-0.3.0.tar.gz`
+- `docs/downloads/mac-photos-duplicate-finder-0.3.1.zip`
+- `docs/downloads/mac-photos-duplicate-finder-0.3.1.tar.gz`
 - `docs/downloads/SHA256SUMS.txt`
 - `docs/downloads/manifest.json`
 

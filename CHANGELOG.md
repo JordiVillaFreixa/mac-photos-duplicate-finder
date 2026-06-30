@@ -2,6 +2,17 @@
 
 All notable project distribution changes are documented here.
 
+## 0.3.1 - 2026-06-30
+
+### Added
+
+- Copy buttons for command snippets on the GitHub Pages site.
+
+### Changed
+
+- Refined the website toward a more professional product-style presentation.
+- Removed the public custom-domain setup page from the website and sitemap.
+
 ## 0.3.0 - 2026-06-30
 
 ### Changed

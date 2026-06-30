@@ -3,21 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mac Photos Duplicate Finder | Safe duplicate reports and Photos review albums</title>
-    <meta name="description" content="Find exact and probable duplicates in macOS Photos libraries, rank copies by quality, and create safe Photos review albums without editing Photos.sqlite.">
+    <title>Mac Photos Duplicate Finder | Review-first cleanup tools for Apple Photos</title>
+    <meta name="description" content="A review-first toolkit for macOS Photos libraries: exact duplicate reports, quality-ranked keep decisions, and Photos review albums without editing Photos.sqlite.">
     <meta name="keywords" content="macOS Photos duplicates, Apple Photos duplicate finder, Photos library cleanup, duplicate photos Mac, Photos.sqlite safe read only, iCloud Photos duplicate review">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://mac-photos-duplicate-finder.org/">
     <meta property="og:title" content="Mac Photos Duplicate Finder">
-    <meta property="og:description" content="Safe Python scripts for duplicate reports and Photos review albums on macOS.">
+    <meta property="og:description" content="Review-first Python tools for duplicate reports and Photos review albums on macOS.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mac-photos-duplicate-finder.org/">
     <meta property="og:image" content="https://mac-photos-duplicate-finder.org/assets/hero-terminal.svg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mac Photos Duplicate Finder">
-    <meta name="twitter:description" content="Find, rank, and review duplicate candidates in macOS Photos safely.">
+    <meta name="twitter:description" content="Find, rank, and review duplicate candidates in macOS Photos without direct library edits.">
     <meta name="twitter:image" content="https://mac-photos-duplicate-finder.org/assets/hero-terminal.svg">
     <link rel="stylesheet" href="assets/site.css">
+    <script src="assets/site.js" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -37,12 +38,11 @@
       <nav class="nav" aria-label="Primary navigation">
         <a class="brand" href="./">Mac Photos Duplicate Finder</a>
         <div class="nav-links">
-          <a href="#workflow">Workflow</a>
+          <a href="#capabilities">Capabilities</a>
           <a href="#downloads">Downloads</a>
           <a href="#safety">Safety</a>
           <a href="#license">License</a>
           <a href="#commands">Commands</a>
-          <a href="custom-domain.html">Domain setup</a>
           <a href="https://github.com/JordiVillaFreixa/mac-photos-duplicate-finder">GitHub</a>
         </div>
       </nav>
@@ -50,12 +50,27 @@
 
     <div class="hero">
       <div>
-        <h1>Clean up macOS Photos duplicates with review-first scripts.</h1>
-        <p class="lead">Generate exact duplicate reports, rank copies by pixels and metadata, and create Photos albums containing only candidates for manual review. The scripts avoid direct writes to Photos.sqlite.</p>
+        <p class="eyebrow">Review-first tooling for Apple Photos libraries</p>
+        <h1>Find duplicate media without touching the Photos package.</h1>
+        <p class="lead">Generate auditable duplicate reports, rank exact copies by Photos metadata, and create review albums inside Photos while avoiding direct writes to <code>Photos.sqlite</code>.</p>
         <div class="actions">
           <a class="button primary" href="#downloads">Download</a>
           <a class="button secondary" href="#commands">View commands</a>
         </div>
+        <dl class="hero-stats" aria-label="Project highlights">
+          <div>
+            <dt>Read-only mapping</dt>
+            <dd>No database writes</dd>
+          </div>
+          <div>
+            <dt>Review albums</dt>
+            <dd>Created through Photos</dd>
+          </div>
+          <div>
+            <dt>MIT</dt>
+            <dd>Open reuse</dd>
+          </div>
+        </dl>
       </div>
       <div class="hero-media" aria-hidden="true">
         <img src="assets/hero-terminal.svg" alt="">
@@ -63,19 +78,19 @@
     </div>
 
     <main>
-      <section id="workflow">
-        <h2>Workflow</h2>
+      <section id="capabilities">
+        <h2>Capabilities</h2>
         <div class="grid">
           <article class="card">
-            <h3>1. Inspect</h3>
-            <p>Confirm that the Photos library is readable and that macOS privacy permissions are not hiding the media files.</p>
+            <h3>Inventory Photos libraries</h3>
+            <p>Check package readability, original media counts, library size, and privacy-access failures before doing duplicate work.</p>
           </article>
           <article class="card">
-            <h3>2. Detect</h3>
-            <p>Find exact duplicates by SHA-256, or probable photo duplicates with perceptual hashing when you want broader candidates.</p>
+            <h3>Rank exact duplicates</h3>
+            <p>Find byte-identical media by SHA-256, then prefer the keep copy with stronger Photos pixel and metadata signals.</p>
           </article>
           <article class="card">
-            <h3>3. Review in Photos</h3>
+            <h3>Create review albums</h3>
             <p>Create a Photos album such as <code>Lower-Quality Duplicate Candidates</code>, then review before deleting anything.</p>
           </article>
         </div>
@@ -83,17 +98,23 @@
 
       <section id="downloads">
         <h2>Downloads</h2>
-        <p>Download a source distribution, unpack it, and run the scripts with Python 3.8 or newer on macOS.</p>
+        <p>Download the current source distribution, unpack it, and run the scripts with Python 3.8 or newer on macOS.</p>
         <div class="downloads">
           <article class="card">
-            <h3>ZIP archive</h3>
-            <p><a class="button secondary" href="downloads/mac-photos-duplicate-finder-0.3.0.zip">Download ZIP</a></p>
-            <p class="download-meta">Checksum list: <a href="downloads/SHA256SUMS.txt">SHA256SUMS.txt</a></p>
+            <h3>Current release</h3>
+            <p class="release-version">Version 0.3.1</p>
+            <p><a class="button secondary" href="downloads/mac-photos-duplicate-finder-0.3.1.zip">Download ZIP v0.3.1</a></p>
+            <p class="download-meta">Includes scripts, tests, README, changelog, and MIT license.</p>
           </article>
           <article class="card">
-            <h3>tar.gz archive</h3>
-            <p><a class="button secondary" href="downloads/mac-photos-duplicate-finder-0.3.0.tar.gz">Download tar.gz</a></p>
-            <p class="download-meta">Machine-readable manifest: <a href="downloads/manifest.json">manifest.json</a></p>
+            <h3>Release assets</h3>
+            <p><a class="button secondary" href="downloads/mac-photos-duplicate-finder-0.3.1.tar.gz">Download tar.gz v0.3.1</a></p>
+            <p class="download-meta"><a href="downloads/SHA256SUMS.txt">SHA256SUMS.txt</a> · <a href="downloads/manifest.json">manifest.json</a> · <a href="downloads/releases.json">releases.json</a></p>
+          </article>
+          <article class="card">
+            <h3>Source repository</h3>
+            <p><a class="button secondary" href="https://github.com/JordiVillaFreixa/mac-photos-duplicate-finder">Open on GitHub</a></p>
+            <p class="download-meta">Browse the code, release workflow, issues, and project history.</p>
           </article>
         </div>
       </section>
@@ -130,25 +151,35 @@
 
       <section id="commands">
         <h2>Core commands</h2>
+        <p class="section-intro">These examples show the quality-ranked workflow: detect exact duplicates, rank the keep copy, then create a Photos review album.</p>
         <h3>Find exact duplicates</h3>
-        <pre><code>python3 scripts/find_exact_duplicates.py \
+        <div class="command-block">
+          <button class="copy-button" type="button" data-copy-target="cmd-exact" aria-label="Copy exact duplicate command">Copy</button>
+          <pre><code id="cmd-exact">python3 scripts/find_exact_duplicates.py \
   --library ~/Pictures/"Photos Library.photoslibrary" \
   --output-dir reports/duplicates</code></pre>
+        </div>
 
         <h3>Prefer the best copy by pixels and metadata</h3>
-        <pre><code>python3 scripts/rerank_exact_duplicates_by_quality.py \
+        <div class="command-block">
+          <button class="copy-button" type="button" data-copy-target="cmd-quality" aria-label="Copy quality ranking command">Copy</button>
+          <pre><code id="cmd-quality">python3 scripts/rerank_exact_duplicates_by_quality.py \
   --library ~/Pictures/"Photos Library.photoslibrary" \
   --duplicate-groups reports/duplicates/duplicate_groups.json \
   --output-dir reports/duplicates-low-quality</code></pre>
+        </div>
 
         <h3>Create a Photos review album</h3>
-        <pre><code>python3 scripts/create_photos_review_album.py \
+        <div class="command-block">
+          <button class="copy-button" type="button" data-copy-target="cmd-album" aria-label="Copy Photos album command">Copy</button>
+          <pre><code id="cmd-album">python3 scripts/create_photos_review_album.py \
   --library ~/Pictures/"Photos Library.photoslibrary" \
   --proposal-csv reports/duplicates-low-quality/duplicate_proposal.csv \
   --album-name "Lower-Quality Duplicate Candidates" \
   --execute \
   --batch-size 100 \
   --batch-timeout 120</code></pre>
+        </div>
         <p>Large albums are processed in batches. A batch size of <code>100</code> is conservative; smaller values are slower, larger values may make Photos stay busy longer.</p>
       </section>
     </main>

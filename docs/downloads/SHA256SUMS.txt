@@ -1,2 +1,2 @@
-6210a1729dadde608b375c886ba15229ceaaf0eee706c262308d9afc65df2932  mac-photos-duplicate-finder-0.3.0.zip
-46a53c548ef54c758c9dfd1648e8024ad061fed9c10a6284b039675554cc448b  mac-photos-duplicate-finder-0.3.0.tar.gz
+bdac4d5da06b3cafc13ff8d43a0c24cd15b8157ef288c2df01ac272306b64db1  mac-photos-duplicate-finder-0.3.1.zip
+ed549924ddf7b8572ee71f5a9c222b42f6a80979ade6837144bcd8537633a6f5  mac-photos-duplicate-finder-0.3.1.tar.gz

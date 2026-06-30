@@ -1,22 +1,22 @@
 {
   "name": "mac-photos-duplicate-finder",
-  "version": "0.3.0",
-  "generated_at": "2026-06-30T07:16:13.092021+00:00",
-  "release_notes": "### Changed\n\n- Renamed the quality-ranked Photos album from `Duplicats més baixa qualitat` to `Lower-Quality Duplicate Candidates`.\n- Updated README, website examples, generated low-quality duplicate CSV reports, and Photos album plans to use the new English album name.",
+  "version": "0.3.1",
+  "generated_at": "2026-06-30T07:32:49.226733+00:00",
+  "release_notes": "### Added\n\n- Copy buttons for command snippets on the GitHub Pages site.\n\n### Changed\n\n- Refined the website toward a more professional product-style presentation.\n- Removed the public custom-domain setup page from the website and sitemap.",
   "distributions": [
     {
-      "filename": "mac-photos-duplicate-finder-0.3.0.zip",
+      "filename": "mac-photos-duplicate-finder-0.3.1.zip",
       "format": "zip",
-      "size_bytes": 36068,
-      "sha256": "6210a1729dadde608b375c886ba15229ceaaf0eee706c262308d9afc65df2932",
-      "url": "downloads/mac-photos-duplicate-finder-0.3.0.zip"
+      "size_bytes": 36176,
+      "sha256": "bdac4d5da06b3cafc13ff8d43a0c24cd15b8157ef288c2df01ac272306b64db1",
+      "url": "downloads/mac-photos-duplicate-finder-0.3.1.zip"
     },
     {
-      "filename": "mac-photos-duplicate-finder-0.3.0.tar.gz",
+      "filename": "mac-photos-duplicate-finder-0.3.1.tar.gz",
       "format": "tar.gz",
-      "size_bytes": 25537,
-      "sha256": "46a53c548ef54c758c9dfd1648e8024ad061fed9c10a6284b039675554cc448b",
-      "url": "downloads/mac-photos-duplicate-finder-0.3.0.tar.gz"
+      "size_bytes": 25633,
+      "sha256": "ed549924ddf7b8572ee71f5a9c222b42f6a80979ade6837144bcd8537633a6f5",
+      "url": "downloads/mac-photos-duplicate-finder-0.3.1.tar.gz"
     }
   ]
 }
