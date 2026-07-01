@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mac-photos-duplicate-finder.org/sitemap.xml
+Sitemap: https://macphotosduplicatefinder.org/sitemap.xml
